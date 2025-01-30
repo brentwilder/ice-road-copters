@@ -248,6 +248,9 @@ if __name__ == '__main__':
             asp_dir = join(asp_dir, 'bin')
     else:
         asp_dir = abspath(join('ASP', 'bin'))
+    # check ASP install exists
+    if not exists(asp_dir):
+        raise Exception(f'The following is not the correct path to ASP: {asp_dir}')
 
     # setup our directory structure
     geoid_dir = join(dirname(in_dir), 'geoid')
