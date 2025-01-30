@@ -27,7 +27,7 @@ Options:
 from cmath import exp
 from docopt import docopt
 from glob import glob
-from os.path import abspath, join, basename, isdir
+from os.path import abspath, join, basename, isdir, exists
 from laz_align import laz_align
 import rioxarray as rio
 from rasterio.crs import CRS
@@ -60,6 +60,9 @@ if __name__ == '__main__':
             asp_dir = join(asp_dir, 'bin')
     else:
         asp_dir = abspath(join('ASP', 'bin'))
+    # check ASP install exists
+    if not exists(asp_dir):
+        raise Exception(f'The following is not the correct path to ASP: {asp_dir}')
     shp_fp = args.get('-s')
     if shp_fp:
         shp_fp = abspath(shp_fp)
